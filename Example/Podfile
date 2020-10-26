@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'IPaSwiftUIView_Example' do
+  pod 'IPaSwiftUIView', :path => '../'
+
+  target 'IPaSwiftUIView_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
