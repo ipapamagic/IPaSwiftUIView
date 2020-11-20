@@ -28,10 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1886D054343771A438DE5AC9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		1886D054343771A438DE5AC9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		21FDABCFDD58252619A6EED6 /* Pods-IPaSwiftUIView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPaSwiftUIView_Tests.release.xcconfig"; path = "Target Support Files/Pods-IPaSwiftUIView_Tests/Pods-IPaSwiftUIView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		283B170DFC3EF072C3E98614 /* Pods_IPaSwiftUIView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPaSwiftUIView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2CBD47F26B9C90DC0C0B2D62 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		2CBD47F26B9C90DC0C0B2D62 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* IPaSwiftUIView_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IPaSwiftUIView_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		9E2F3B8FF278A5EFF3328574 /* Pods-IPaSwiftUIView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPaSwiftUIView_Tests.debug.xcconfig"; path = "Target Support Files/Pods-IPaSwiftUIView_Tests/Pods-IPaSwiftUIView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A31AE594086FB477D0A96545 /* Pods-IPaSwiftUIView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPaSwiftUIView_Example.release.xcconfig"; path = "Target Support Files/Pods-IPaSwiftUIView_Example/Pods-IPaSwiftUIView_Example.release.xcconfig"; sourceTree = "<group>"; };
-		B391B162D26F86AF44F26A15 /* IPaSwiftUIView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = IPaSwiftUIView.podspec; path = ../IPaSwiftUIView.podspec; sourceTree = "<group>"; };
+		B391B162D26F86AF44F26A15 /* IPaSwiftUIView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IPaSwiftUIView.podspec; path = ../IPaSwiftUIView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C780FBE18506459A011C2775 /* Pods_IPaSwiftUIView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IPaSwiftUIView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D02A0D779F38CD2229312309 /* Pods-IPaSwiftUIView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IPaSwiftUIView_Example.debug.xcconfig"; path = "Target Support Files/Pods-IPaSwiftUIView_Example/Pods-IPaSwiftUIView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,7 +77,6 @@
 				9E2F3B8FF278A5EFF3328574 /* Pods-IPaSwiftUIView_Tests.debug.xcconfig */,
 				21FDABCFDD58252619A6EED6 /* Pods-IPaSwiftUIView_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -227,6 +226,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
