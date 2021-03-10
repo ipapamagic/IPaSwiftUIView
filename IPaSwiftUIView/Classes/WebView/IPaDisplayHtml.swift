@@ -7,11 +7,16 @@
 
 import Foundation
 
+enum IPaURLRequest:Equatable {
+    case url(URL)
+    case htmlString(String,URL?,Bool)
+    case urlRequest(URLRequest)
+}
 protocol IPaDisplayHtml {
-    func replaceCSSPtToPx(with string:String) -> String
+    static func replaceCSSPtToPx(with string:String) -> String
 }
 extension IPaDisplayHtml {
-    func replaceCSSPtToPx(with string:String) -> String {
+    static func replaceCSSPtToPx(with string:String) -> String {
         guard let regex = try? NSRegularExpression(pattern: "(\\d+)pt", options:  NSRegularExpression.Options()) else {
             return string
         }

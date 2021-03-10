@@ -110,7 +110,7 @@ public class IPaWKWebView: WKWebView,IPaDisplayHtml {
     public func loadHTMLString(_ string: String, baseURL: URL?,replacePtToPx:Bool) -> WKNavigation? {
         var content = string
         if replacePtToPx {
-            content = self.replaceCSSPtToPx(with: string)
+            content = IPaWKWebView.replaceCSSPtToPx(with: string)
         }
         return super.loadHTMLString(content, baseURL: baseURL)
     }

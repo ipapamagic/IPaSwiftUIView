@@ -11,17 +11,26 @@ import IPaLog
 import Combine
 public struct IPaWebView: UIViewRepresentable {
     public typealias UIViewType = IPaWKWebView
-    public enum IPaURLRequest:Equatable {
-        case urlString(String)
-        case htmlString(String,URL?,Bool)
-        case urlRequest(URLRequest)
-    }
+    
     var request:IPaURLRequest? = nil
     var isScrollEnabled:Bool = true
     @Binding var contentHeight:CGFloat
     var navigationDelegate:WKNavigationDelegate?
     var uiDelegate:WKUIDelegate?
-    public init(_ request:IPaURLRequest? = nil,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
+    public init(url:URL,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
+        let request = IPaURLRequest.url(url)
+        self.init(request, uiDelegate: uiDelegate, navigationDelegate: navigationDelegate, isScrollEnabled: isScrollEnabled, contentHeight: contentHeight)
+    }
+    public init(htmlContent:String,baseUrl:URL?,replacePtToPx:Bool = true,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
+        let request = IPaURLRequest.htmlString(htmlContent, baseUrl, replacePtToPx)
+        self.init(request, uiDelegate: uiDelegate, navigationDelegate: navigationDelegate, isScrollEnabled: isScrollEnabled, contentHeight: contentHeight)
+    }
+    public init(request:URLRequest,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
+        let request = IPaURLRequest.urlRequest(request)
+        self.init(request, uiDelegate: uiDelegate, navigationDelegate: navigationDelegate, isScrollEnabled: isScrollEnabled, contentHeight: contentHeight)
+    }
+    
+    init(_ request:IPaURLRequest? = nil,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
         self.request = request
         
         self._contentHeight = contentHeight ?? Binding.constant(0)
@@ -34,6 +43,9 @@ public struct IPaWebView: UIViewRepresentable {
     public func makeUIView(context: Context) -> IPaWKWebView {
         
         let webView = IPaWKWebView()
+        webView.isOpaque = false
+        webView.backgroundColor = UIColor.clear
+        webView.scrollView.backgroundColor = UIColor.clear
         context.coordinator.webView = webView
         webView.initialJSScript(context.coordinator)
         
@@ -73,10 +85,7 @@ public struct IPaWebView: UIViewRepresentable {
             switch request {
             case .htmlString(let htmlString,let baseUrl,let replaceCSSPtToPx):
                 _ = webView?.loadHTMLString(htmlString, baseURL: baseUrl, replacePtToPx: replaceCSSPtToPx)
-            case .urlString(let string):
-                guard let url = URL(string:string)  else {
-                    return
-                }
+            case .url(let url):
                 let urlRequest = URLRequest(url: url)
                 _ = webView?.load(urlRequest)
             case .urlRequest(let urlRequest):
