@@ -71,7 +71,15 @@ public struct IPaInfinityScrollView<Content: View>: View,IPaScrollViewChangeObse
     
     public init(_ axis:IPaInfinityScrollViewDirection = .horizontal,contentOffset:CGPoint = .zero,contentSize:CGSize,contentInset:UIEdgeInsets = .zero,pageScale:Int = 10,coordinator:IPaInfinityScrollViewCoordinator = IPaInfinityScrollViewCoordinator() ,@ViewBuilder content: @escaping () -> Content) {
         self.scrollView.contentInset = contentInset
-//        self.scrollView.contentOffset = contentOffset
+        var offsetX = contentOffset.x
+        while offsetX > contentSize.width {
+            offsetX -= contentSize.width
+        }
+        while offsetX < 0 {
+            offsetX += contentSize.width
+        }
+        self.scrollView.contentSize = contentSize
+        self.scrollView.contentOffset = CGPoint(x: offsetX, y: contentOffset.y)
         self.content = content
         self.coordinator = coordinator
         self.coordinator.contentSize = contentSize
