@@ -1,5 +1,5 @@
 //
-//  IPaAnimateObserverModifier.swift
+//  IPaSUIAnimateObserverModifier.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2021/2/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct IPaAnimationObserverModifier<Value>: AnimatableModifier where Value: VectorArithmetic {
+public struct IPaSUIAnimationObserverModifier<Value>: AnimatableModifier where Value: VectorArithmetic {
     
     /// While animating, SwiftUI changes the old input value to the new target value using this property. This value is set to the old value until the animation completes.
     public var animatableData: Value {
@@ -51,7 +51,7 @@ extension View {
     ///   - value: The value to observe for animations.
     ///   - completion: The completion callback to call once the animation completes.
     /// - Returns: A modified `View` instance with the observer attached.
-    public func onAnimationCompleted<Value: VectorArithmetic>(for value: Value, completion: @escaping () -> Void) -> ModifiedContent<Self, IPaAnimationObserverModifier<Value>> {
-        return modifier(IPaAnimationObserverModifier(observedValue: value, completion: completion))
+    public func onAnimationCompleted<Value: VectorArithmetic>(for value: Value, completion: @escaping () -> Void) -> ModifiedContent<Self, IPaSUIAnimationObserverModifier<Value>> {
+        return modifier(IPaSUIAnimationObserverModifier(observedValue: value, completion: completion))
     }
 }

@@ -1,5 +1,5 @@
 //
-//  IPaStackView.swift
+//  IPaSUIStackView.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2020/12/30.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct IPaStackView<Content: View>: View  {
+public struct IPaSUIStackView<Content: View>: View  {
     public enum Direction {
         case horizontal
         case vertical
@@ -35,7 +35,7 @@ public struct IPaStackView<Content: View>: View  {
 
 struct IPaStackView_Previews: PreviewProvider {
     static var previews: some View {
-        IPaStackView( content: {
+        IPaSUIStackView( content: {
             Text("test")
             Text("test")
         })

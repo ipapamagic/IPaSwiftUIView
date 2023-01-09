@@ -1,5 +1,5 @@
 //
-//  IPaSwiftUIOrientationController.swift
+//  IPaSUIOrientationController.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2021/2/17.
@@ -15,7 +15,7 @@ import Combine
 /// Supported interface orientations come from the root of the view hierarchy.
 let orientationUpdatedNotification = Notification.Name(rawValue: "orientationUpdatedNotification")
 
-public class IPaSwiftUIOrientationController<Content: View>: UIHostingController<IPaSwiftUIOrientationController.Root<Content>> {
+public class IPaSUIOrientationController<Content: View>: UIHostingController<IPaSUIOrientationController.Root<Content>> {
     
     var supportedIOs: UIInterfaceOrientationMask = .portrait
     var preferredIOForPresentation: UIInterfaceOrientation = .portrait

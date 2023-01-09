@@ -1,5 +1,5 @@
 //
-//  IPaGeometryHelper.swift
+//  IPaSUIGeometryHelper.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2020/12/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct IPaGeometryGetInfo: ViewModifier {
+struct IPaSUIGeometryGetInfo: ViewModifier {
     var onInfoUpdate:(_ geometry:GeometryProxy)->()
     public func body(content: Content) -> some View {
         return content.overlay(GeometryReader { geometry -> Color in
@@ -19,7 +19,7 @@ struct IPaGeometryGetInfo: ViewModifier {
     }
 }
 
-struct IPaGeometryGetRect: ViewModifier {
+struct IPaSUIGeometryGetRect: ViewModifier {
     @Binding var rect: CGRect
     public func body(content: Content) -> some View {
         
@@ -31,7 +31,7 @@ struct IPaGeometryGetRect: ViewModifier {
         })
     }
 }
-struct IPaGeometryGetSize: ViewModifier {
+struct IPaSUIGeometryGetSize: ViewModifier {
     @Binding var size: CGSize
     public func body(content: Content) -> some View {
         
@@ -45,12 +45,12 @@ struct IPaGeometryGetSize: ViewModifier {
 }
 extension View {
     public func onUpdate(_ size:Binding<CGSize>) -> some View{
-        return self.modifier(IPaGeometryGetSize(size: size))
+        return self.modifier(IPaSUIGeometryGetSize(size: size))
     }
     public func onGeometryUpdate(_ callback:@escaping (GeometryProxy) -> ()) -> some View{
-        return self.modifier(IPaGeometryGetInfo(onInfoUpdate: callback))
+        return self.modifier(IPaSUIGeometryGetInfo(onInfoUpdate: callback))
     }
     public func onUpdate(_ rect:Binding<CGRect>) -> some View {
-        return self.modifier(IPaGeometryGetRect(rect:rect))
+        return self.modifier(IPaSUIGeometryGetRect(rect:rect))
     }
 }

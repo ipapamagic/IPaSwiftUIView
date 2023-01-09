@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 import IPaLog
-public class IPaWKWebView: WKWebView,IPaDisplayHtml {
+public class IPaSUIWKWebView: WKWebView,IPaSUIDisplayHtml {
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -110,7 +110,7 @@ public class IPaWKWebView: WKWebView,IPaDisplayHtml {
     public func loadHTMLString(_ string: String, baseURL: URL?,replacePtToPx:Bool) -> WKNavigation? {
         var content = string
         if replacePtToPx {
-            content = IPaWKWebView.replaceCSSPtToPx(with: string)
+            content = IPaSUIWKWebView.replaceCSSPtToPx(with: string)
         }
         return super.loadHTMLString(content, baseURL: baseURL)
     }

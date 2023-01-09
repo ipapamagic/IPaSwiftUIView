@@ -1,5 +1,5 @@
 //
-//  IPaActivityIndicatorView.swift
+//  IPaSUIActivityIndicatorView.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2021/1/16.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct IPaActivityIndicatorView: UIViewRepresentable {
+public struct IPaSUIActivityIndicatorView: UIViewRepresentable {
 
     @State public var isAnimating: Bool = true
     public let style: UIActivityIndicatorView.Style
@@ -16,7 +16,7 @@ public struct IPaActivityIndicatorView: UIViewRepresentable {
         self.style = style
         self.tintColor = tintColor
     }
-    public func makeUIView(context: UIViewRepresentableContext<IPaActivityIndicatorView>) -> UIActivityIndicatorView {
+    public func makeUIView(context: UIViewRepresentableContext<IPaSUIActivityIndicatorView>) -> UIActivityIndicatorView {
         let view = UIActivityIndicatorView(style: style)
         if #available(iOS 14.0, *) {
             view.color = UIColor(tintColor)
@@ -38,7 +38,7 @@ public struct IPaActivityIndicatorView: UIViewRepresentable {
         view.hidesWhenStopped = true
         return view
     }
-    public func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<IPaActivityIndicatorView>) {
+    public func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<IPaSUIActivityIndicatorView>) {
         isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
     }
 }

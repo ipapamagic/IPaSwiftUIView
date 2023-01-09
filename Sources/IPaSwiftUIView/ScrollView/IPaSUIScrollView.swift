@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-public protocol IPaScrollViewChangeObserver:View {
+public protocol IPaSUIScrollViewChangeObserver:View {
     var scrollView:UIScrollView {get}
-    func onScrollViewChange<Type:Equatable>(_ keyPath:KeyPath<UIScrollView,Type>,action: @escaping (UIScrollView,Type)->Void) -> IPaScrollViewParameterObserver<Self,Type>
+    func onScrollViewChange<Type:Equatable>(_ keyPath:KeyPath<UIScrollView,Type>,action: @escaping (UIScrollView,Type)->Void) -> IPaSUIScrollViewParameterObserver<Self,Type>
 }
-extension IPaScrollViewChangeObserver {
+extension IPaSUIScrollViewChangeObserver {
     
-    public func onScrollViewChange<Type:Equatable>(_ keyPath:KeyPath<UIScrollView,Type>,action: @escaping (UIScrollView,Type)->Void) -> IPaScrollViewParameterObserver<Self,Type> {
-        IPaScrollViewParameterObserver(self, scrollView: self.scrollView,keyPath:keyPath, action: action)
+    public func onScrollViewChange<Type:Equatable>(_ keyPath:KeyPath<UIScrollView,Type>,action: @escaping (UIScrollView,Type)->Void) -> IPaSUIScrollViewParameterObserver<Self,Type> {
+        IPaSUIScrollViewParameterObserver(self, scrollView: self.scrollView,keyPath:keyPath, action: action)
     }
 }
-public struct IPaScrollViewParameterObserver<Base:View,Value:Equatable>: View,IPaScrollViewChangeObserver {
+public struct IPaSUIScrollViewParameterObserver<Base:View,Value:Equatable>: View,IPaSUIScrollViewChangeObserver {
     public var scrollView: UIScrollView {
         return self.model.targetScrollView
     }
@@ -32,8 +32,8 @@ public struct IPaScrollViewParameterObserver<Base:View,Value:Equatable>: View,IP
         self.base = base
         self.model = Model(scrollView,keyPath: keyPath, action: action)
     }
-    public func onScrollViewChange<Type:Equatable>(_ keyPath:KeyPath<UIScrollView,Type>,action: @escaping (UIScrollView,Type)->Void) -> IPaScrollViewParameterObserver<Base,Type> {
-        IPaScrollViewParameterObserver<Base,Type>(self.base, scrollView: self.scrollView,keyPath:keyPath, action: action)
+    public func onScrollViewChange<Type:Equatable>(_ keyPath:KeyPath<UIScrollView,Type>,action: @escaping (UIScrollView,Type)->Void) -> IPaSUIScrollViewParameterObserver<Base,Type> {
+        IPaSUIScrollViewParameterObserver<Base,Type>(self.base, scrollView: self.scrollView,keyPath:keyPath, action: action)
     }
     class Model {
         let targetScrollView:UIScrollView
@@ -58,9 +58,9 @@ public struct IPaScrollViewParameterObserver<Base:View,Value:Equatable>: View,IP
     }
     
 }
-public struct IPaScrollView<Content: View>: UIViewControllerRepresentable, Equatable,IPaScrollViewChangeObserver {
+public struct IPaSUIScrollView<Content: View>: UIViewControllerRepresentable, Equatable,IPaSUIScrollViewChangeObserver {
     
-    public static func == (lhs: IPaScrollView<Content>, rhs: IPaScrollView<Content>) -> Bool {
+    public static func == (lhs: IPaSUIScrollView<Content>, rhs: IPaSUIScrollView<Content>) -> Bool {
         return lhs.scrollViewController == rhs.scrollViewController
     }
     

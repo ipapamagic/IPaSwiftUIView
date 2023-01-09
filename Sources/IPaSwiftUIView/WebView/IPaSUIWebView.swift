@@ -1,5 +1,5 @@
 //
-//  IPaWebView.swift
+//  IPaSUIWebView.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2020/10/26.
@@ -9,28 +9,28 @@ import SwiftUI
 import WebKit
 import IPaLog
 import Combine
-public struct IPaWebView: UIViewRepresentable {
-    public typealias UIViewType = IPaWKWebView
+public struct IPaSUIWebView: UIViewRepresentable {
+    public typealias UIViewType = IPaSUIWKWebView
     
-    var request:IPaURLRequest? = nil
+    var request:IPaSUIURLRequest? = nil
     var isScrollEnabled:Bool = true
     @Binding var contentHeight:CGFloat
     var navigationDelegate:WKNavigationDelegate?
     var uiDelegate:WKUIDelegate?
     public init(url:URL,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
-        let request = IPaURLRequest.url(url)
+        let request = IPaSUIURLRequest.url(url)
         self.init(request, uiDelegate: uiDelegate, navigationDelegate: navigationDelegate, isScrollEnabled: isScrollEnabled, contentHeight: contentHeight)
     }
-    public init(htmlContent:String,baseUrl:URL?,replacePtToPx:Bool = true,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
-        let request = IPaURLRequest.htmlString(htmlContent, baseUrl, replacePtToPx)
+    public init(htmlContent:String,baseUrl:URL? = nil,replacePtToPx:Bool = true,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
+        let request = IPaSUIURLRequest.htmlString(htmlContent, baseUrl, replacePtToPx)
         self.init(request, uiDelegate: uiDelegate, navigationDelegate: navigationDelegate, isScrollEnabled: isScrollEnabled, contentHeight: contentHeight)
     }
     public init(request:URLRequest,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
-        let request = IPaURLRequest.urlRequest(request)
+        let request = IPaSUIURLRequest.urlRequest(request)
         self.init(request, uiDelegate: uiDelegate, navigationDelegate: navigationDelegate, isScrollEnabled: isScrollEnabled, contentHeight: contentHeight)
     }
     
-    init(_ request:IPaURLRequest? = nil,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
+    init(_ request:IPaSUIURLRequest? = nil,uiDelegate:WKUIDelegate? = nil,navigationDelegate:WKNavigationDelegate? = nil,isScrollEnabled:Bool = true,contentHeight:Binding<CGFloat>? = nil) {
         self.request = request
         
         self._contentHeight = contentHeight ?? Binding.constant(0)
@@ -40,9 +40,9 @@ public struct IPaWebView: UIViewRepresentable {
         
         
     }
-    public func makeUIView(context: Context) -> IPaWKWebView {
+    public func makeUIView(context: Context) -> IPaSUIWKWebView {
         
-        let webView = IPaWKWebView()
+        let webView = IPaSUIWKWebView()
         webView.isOpaque = false
         webView.backgroundColor = UIColor.clear
         webView.scrollView.backgroundColor = UIColor.clear
@@ -55,7 +55,7 @@ public struct IPaWebView: UIViewRepresentable {
     }
     
     
-    public func updateUIView(_ uiView: IPaWKWebView, context: Context) {
+    public func updateUIView(_ uiView: IPaSUIWKWebView, context: Context) {
         if let request = self.request {
             context.coordinator.load(request)
         }
@@ -70,14 +70,14 @@ public struct IPaWebView: UIViewRepresentable {
         Coordinator($contentHeight)
     }
     public class Coordinator : NSObject,WKScriptMessageHandler {
-        weak var webView:IPaWKWebView?
-        var request:IPaURLRequest? = nil
+        weak var webView:IPaSUIWKWebView?
+        var request:IPaSUIURLRequest? = nil
         var contentHeight:Binding<CGFloat>
         init(_ contentHeight:Binding<CGFloat>) {
             self.contentHeight = contentHeight
             super.init()
         }
-        func load(_ request:IPaURLRequest) {
+        func load(_ request:IPaSUIURLRequest) {
             if request == self.request {
                 return
             }

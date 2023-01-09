@@ -1,5 +1,5 @@
 //
-//  IPaUrlImage.swift
+//  IPaSUIUrlImage.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2021/5/7.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 import IPaDownloadManager
-public struct IPaUrlImage: View {
+public struct IPaSUIUrlImage: View {
     @State public var url:URL?
     var defaultImage:UIImage? = nil
     @State public var downloadedImage:UIImage? = nil
@@ -41,6 +41,6 @@ public struct IPaUrlImage: View {
 
 struct IPaUrlImage_Previews: PreviewProvider {
     static var previews: some View {
-        IPaUrlImage(url:"https://www.google.com")
+        IPaSUIUrlImage(url:"https://www.google.com")
     }
 }

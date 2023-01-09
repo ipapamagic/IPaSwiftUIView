@@ -1,5 +1,5 @@
 //
-//  IPaLoadingView.swift
+//  IPaSUILoadingView.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2021/1/16.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct IPaLoadingView<Content>: View where Content: View {
+public struct IPaSUILoadingView<Content>: View where Content: View {
     @Binding public var isShowing: Bool
     let content: () -> Content
     let bgColor:Color
@@ -23,7 +23,7 @@ public struct IPaLoadingView<Content>: View where Content: View {
                     self.content().blur(radius: 3).disabled(true).overlay(
                         ZStack{
                             VStack {
-                                IPaActivityIndicatorView()
+                                IPaSUIActivityIndicatorView()
                                 if let labelText = self.labelText,labelText.count > 0 {
                                     Text(labelText).foregroundColor(self.labelTextColor)
                                 }

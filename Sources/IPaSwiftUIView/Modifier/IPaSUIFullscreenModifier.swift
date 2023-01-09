@@ -1,5 +1,5 @@
 //
-//  IPaFullscreenModifier.swift
+//  IPaSUIFullscreenModifier.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2021/4/30.
@@ -10,11 +10,11 @@ import SwiftUI
 
 extension View {
     public func showFullScreen<Content: View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) -> some View {
-        self.modifier(IPaFullScreenModifier(isPresented: isPresented, builder: content))
+        self.modifier(IPaSUIFullScreenModifier(isPresented: isPresented, builder: content))
     }
 }
 
-struct IPaFullScreenModifier<V: View>: ViewModifier {
+struct IPaSUIFullScreenModifier<V: View>: ViewModifier {
     let isPresented: Binding<Bool>
     let builder: () -> V
 

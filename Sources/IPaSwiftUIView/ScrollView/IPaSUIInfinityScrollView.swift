@@ -9,14 +9,14 @@ import SwiftUI
 
 /// Contains the gap between the smallest value for the y-coordinate of
 /// the frame layer and the content layer.
-public enum IPaInfinityScrollViewDirection {
+public enum IPaSUIInfinityScrollViewDirection {
     case horizontal
     case vertical
 }
-open class IPaInfinityScrollViewCoordinator: NSObject, UIScrollViewDelegate {
+open class IPaSUIInfinityScrollViewCoordinator: NSObject, UIScrollViewDelegate {
     open var contentSize:CGSize = .zero
     var pageScale:Int = 0
-    var axis:IPaInfinityScrollViewDirection = .horizontal
+    var axis:IPaSUIInfinityScrollViewDirection = .horizontal
     
     open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
@@ -57,10 +57,10 @@ open class IPaInfinityScrollViewCoordinator: NSObject, UIScrollViewDelegate {
 }
 
 
-public struct IPaInfinityScrollView<Content: View>: View,IPaScrollViewChangeObserver {
+public struct IPaInfinityScrollView<Content: View>: View,IPaSUIScrollViewChangeObserver {
     
     let content: () -> Content
-    var coordinator:IPaInfinityScrollViewCoordinator
+    var coordinator:IPaSUIInfinityScrollViewCoordinator
     public var scrollView:UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.isPagingEnabled = false
@@ -69,7 +69,7 @@ public struct IPaInfinityScrollView<Content: View>: View,IPaScrollViewChangeObse
         return scrollView
     }()
     
-    public init(_ axis:IPaInfinityScrollViewDirection = .horizontal,contentOffset:CGPoint = .zero,contentSize:CGSize,contentInset:UIEdgeInsets = .zero,pageScale:Int = 10,coordinator:IPaInfinityScrollViewCoordinator = IPaInfinityScrollViewCoordinator() ,@ViewBuilder content: @escaping () -> Content) {
+    public init(_ axis:IPaSUIInfinityScrollViewDirection = .horizontal,contentOffset:CGPoint = .zero,contentSize:CGSize,contentInset:UIEdgeInsets = .zero,pageScale:Int = 10,coordinator:IPaSUIInfinityScrollViewCoordinator = IPaSUIInfinityScrollViewCoordinator() ,@ViewBuilder content: @escaping () -> Content) {
         self.scrollView.contentInset = contentInset
         var offsetX = contentOffset.x
         while offsetX > contentSize.width {
@@ -90,8 +90,8 @@ public struct IPaInfinityScrollView<Content: View>: View,IPaScrollViewChangeObse
     
     public var body: some View {
         
-        IPaScrollView(self.scrollView) {
-            IPaStackView(direction:self.coordinator.axis == .horizontal ? .horizontal : .vertical, spacing:0) {
+        IPaSUIScrollView(self.scrollView) {
+            IPaSUIStackView(direction:self.coordinator.axis == .horizontal ? .horizontal : .vertical, spacing:0) {
                 ForEach(0..<self.coordinator.pageScale,id:\.self) {index in
                     
                     content().frame(width: self.coordinator.contentSize.width, height: self.coordinator.contentSize.height)
