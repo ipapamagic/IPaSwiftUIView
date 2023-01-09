@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IPaSwiftUIView'
-  s.version          = '1.0'
+  s.version          = '1.0.0'
   s.summary          = 'A short description of IPaSwiftUIView.'
 
 # This description is used to generate tags and improve search results.
@@ -29,8 +29,7 @@ TODO: Add long description of the pod here.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '13.0'
-  s.swift_version = '5.3'
-  s.source_files = 'IPaSwiftUIView/Classes/**/*'
+  s.source_files = 'Sources/IPaSwiftUIView/**/*'
   
   # s.resource_bundles = {
   #   'IPaSwiftUIView' => ['IPaSwiftUIView/Assets/*.png']
@@ -39,6 +38,6 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.dependency 'IPaLog', '~> 3.0'
-  s.dependency 'IPaDownloadManager' , '~> 1.3'
+  s.dependency 'IPaLog', '~> 3.1.0'
+  s.dependency 'IPaDownloadManager' , '~> 1.4.0'
 end
