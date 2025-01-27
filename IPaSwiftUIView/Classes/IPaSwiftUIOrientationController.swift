@@ -1,5 +1,5 @@
 //
-//  IPaSUIOrientationController.swift
+//  IPaSwiftUIOrientationController.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2021/2/17.
@@ -14,12 +14,8 @@ import Combine
 ///
 /// Supported interface orientations come from the root of the view hierarchy.
 let orientationUpdatedNotification = Notification.Name(rawValue: "orientationUpdatedNotification")
-extension UIApplication {
-    public static func setSupport( orientations:UIInterfaceOrientationMask,preferred interfaceOrientation:UIInterfaceOrientation,should autoRate:Bool = true) {
-        NotificationCenter.default.post(name: orientationUpdatedNotification, object: nil,userInfo: ["supported":orientations.rawValue,"prefer":interfaceOrientation.rawValue,"shouldAutoRotate":autoRate])
-    }
-}
-public class IPaSUIOrientationController<Content: View>: UIHostingController<IPaSUIOrientationController.Root<Content>> {
+
+public class IPaSwiftUIOrientationController<Content: View>: UIHostingController<IPaSwiftUIOrientationController.Root<Content>> {
     
     var supportedIOs: UIInterfaceOrientationMask = .portrait
     var preferredIOForPresentation: UIInterfaceOrientation = .portrait
@@ -47,42 +43,33 @@ public class IPaSUIOrientationController<Content: View>: UIHostingController<IPa
             self.supportedIOs = UIInterfaceOrientationMask(rawValue: rawValue)
             self.preferredIOForPresentation = preferredIOForPresentation
             self.shouldAR = shouldAR
-           
-            if #available(iOS 16, *) {
-                let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-                scene?.requestGeometryUpdate(.iOS(interfaceOrientations: self.supportedIOs))
-                self.setNeedsUpdateOfSupportedInterfaceOrientations()
-            }
-            else {
-                var orientation = UIDeviceOrientation.portrait
-                switch preferredIOForPresentation {
-                case .portrait:
-                    orientation = .portrait
-                case .landscapeLeft:
-                    orientation = .landscapeLeft
-                case .landscapeRight:
-                    orientation = .landscapeRight
-                case .portraitUpsideDown:
-                    orientation = .portraitUpsideDown
-                case .unknown:
-                    break
-                    
-                @unknown default:
-                    break
-                }
-                UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
+            var orientation = UIDeviceOrientation.portrait
+            switch preferredIOForPresentation {
+            case .portrait:
+                orientation = .portrait
+            case .landscapeLeft:
+                orientation = .landscapeLeft
+            case .landscapeRight:
+                orientation = .landscapeRight
+            case .portraitUpsideDown:
+                orientation = .portraitUpsideDown
+            case .unknown:
+                break
                 
+            @unknown default:
+                break
             }
+
+            UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
             UIViewController.attemptRotationToDeviceOrientation()
-            
             
         })
         
         
     }
-    public struct Root<RootContent: View>: View {
+    public struct Root<Content: View>: View {
         
-        let contentView: RootContent
+        let contentView: Content
         
         public var body: some View {
             contentView
@@ -92,3 +79,9 @@ public class IPaSUIOrientationController<Content: View>: UIHostingController<IPa
     }
 }
 
+extension UIDevice {
+    public func setDevice(support orientations:UIInterfaceOrientationMask,preferred interfaceOrientation:UIInterfaceOrientation,should autoRate:Bool = true) {
+        NotificationCenter.default.post(name: orientationUpdatedNotification, object: nil,userInfo: ["supported":orientations.rawValue,"prefer":interfaceOrientation.rawValue,"shouldAutoRotate":autoRate])
+    }
+
+}

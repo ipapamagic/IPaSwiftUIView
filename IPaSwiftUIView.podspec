@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'IPaSwiftUIView'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'A short description of IPaSwiftUIView.'
 
 # This description is used to generate tags and improve search results.
@@ -29,6 +29,9 @@ TODO: Add long description of the pod here.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '13.0'
+  s.tvos.deployment_target = '13.0'
+  s.watchos.deployment_target = '6.0'
+  s.visionos.deployment_target = '1.0'
   s.source_files = 'Sources/IPaSwiftUIView/**/*'
   
   # s.resource_bundles = {

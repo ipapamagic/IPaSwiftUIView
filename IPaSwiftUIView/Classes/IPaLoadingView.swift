@@ -1,5 +1,5 @@
 //
-//  IPaSUILoadingView.swift
+//  IPaLoadingView.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2021/1/16.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct IPaSUILoadingView<Content:View>: View {
+public struct IPaLoadingView<Content>: View where Content: View {
     @Binding public var isShowing: Bool
     let content: () -> Content
     let bgColor:Color
@@ -17,20 +17,23 @@ public struct IPaSUILoadingView<Content:View>: View {
     let labelTextColor:Color
     public var body: some View {
         if self.isShowing {
-            ZStack(alignment: .center) {
-                
-                self.content().blur(radius: 3).disabled(true).overlay(
-                    ZStack{
-                        VStack {
-                            IPaSUIActivityIndicatorView()
-                            if let labelText = self.labelText,labelText.count > 0 {
-                                Text(labelText).foregroundColor(self.labelTextColor)
+            GeometryReader { geometry in
+                ZStack(alignment: .center) {
+                    
+                    self.content().blur(radius: 3).disabled(true).overlay(
+                        ZStack{
+                            VStack {
+                                IPaActivityIndicatorView()
+                                if let labelText = self.labelText,labelText.count > 0 {
+                                    Text(labelText).foregroundColor(self.labelTextColor)
+                                }
                             }
-                        }
-                    }.padding(self.paddingValue).background(self.bgColor)
+                        }.padding(self.paddingValue).background(self.bgColor)
                         .cornerRadius(self.cornerRadiusValue).shadow(radius: 3)
                         .opacity( 0.8).animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/)
-                )
+                    )
+                }
+                
             }
             
         }

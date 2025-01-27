@@ -1,5 +1,5 @@
 //
-//  IPaSUIViewBuilder.swift
+//  IPaViewBuilder.swift
 //  IPaSwiftUIView
 //
 //  Created by IPa Chen on 2020/10/31.
